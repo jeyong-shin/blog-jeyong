@@ -6,6 +6,9 @@ import { formatDate } from "@/lib/utils";
 import { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 
+// 광고 컴포넌트 가져오기
+import ArticleBottomAdWrapper from "@/components/article-bottom-ad-wrapper";
+
 // 마크다운 렌더링을 위한 라이브러리 필요시:
 // npm install react-markdown 설치 후 사용
 
@@ -201,6 +204,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <div className="prose prose-neutral dark:prose-invert max-w-none">
               {article.content && <ReactMarkdown>{article.content}</ReactMarkdown>}
             </div>
+            
+            {/* 아티클 하단 광고 */}
+            <ArticleBottomAdWrapper />
           </div>
         );
       }
@@ -251,6 +257,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <div className="prose prose-neutral dark:prose-invert max-w-none">
           {article.content && <ReactMarkdown>{article.content}</ReactMarkdown>}
         </div>
+        
+        {/* 아티클 하단 광고 */}
+        <ArticleBottomAdWrapper />
       </div>
     );
   } catch (error) {
