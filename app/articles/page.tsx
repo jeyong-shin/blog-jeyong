@@ -1,8 +1,11 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { createServerClient, supabase } from "@/lib/supabase"
+import { createServerClient } from "@/lib/supabase"
 import { formatDate } from "@/lib/utils"
+
+// 광고 컴포넌트 구현을 위한 클라이언트 래퍼
+import ArticleAdWrapper from "@/components/article-ad-wrapper"
 
 async function getArticles() {
   try {
@@ -32,6 +35,9 @@ export default async function ArticlesPage() {
   return (
     <div className="container px-4 py-12 md:py-16">
       <h1 className="mb-8 text-3xl font-bold tracking-tighter md:text-4xl">모든 글</h1>
+      
+      {/* 광고 배너 - 클라이언트 래퍼 사용 */}
+      <ArticleAdWrapper />
       
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {articles.map((article) => (
