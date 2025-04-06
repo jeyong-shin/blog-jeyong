@@ -1,47 +1,38 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { createServerClient, supabase } from "@/lib/supabase"
+import { formatDate } from "@/lib/utils"
 
-// Mock data for recent articles
-const recentArticles = [
-  {
-    id: 1,
-    title: "Next.js 14의 새로운 기능",
-    excerpt: "Next.js 14에서 추가된 새로운 기능들을 살펴봅니다.",
-    date: "2023-12-15",
-    readTime: "5분",
-  },
-  {
-    id: 2,
-    title: "React Server Components 이해하기",
-    excerpt: "React Server Components의 개념과 사용법에 대해 알아봅니다.",
-    date: "2023-12-10",
-    readTime: "7분",
-  },
-  {
-    id: 3,
-    title: "Tailwind CSS로 효율적인 스타일링",
-    excerpt: "Tailwind CSS를 활용한 효율적인 웹 개발 방법을 소개합니다.",
-    date: "2023-12-05",
-    readTime: "4분",
-  },
-  {
-    id: 4,
-    title: "TypeScript 타입 시스템 마스터하기",
-    excerpt: "TypeScript의 고급 타입 기능을 활용하는 방법을 알아봅니다.",
-    date: "2023-11-28",
-    readTime: "8분",
-  },
-  {
-    id: 5,
-    title: "웹 성능 최적화 전략",
-    excerpt: "웹 애플리케이션의 성능을 향상시키는 다양한 전략을 소개합니다.",
-    date: "2023-11-20",
-    readTime: "6분",
-  },
-]
+// 날짜 포맷 함수 (필요하면 lib/utils.ts에 추가)
+// 이 시점에서 utils.ts가 없다면 추후에 생성해 주세요
 
-export default function Home() {
+async function getRecentArticles() {
+  try {
+    const serverClient = createServerClient();
+    
+    const { data, error } = await serverClient
+      .from("articles")
+      .select("id, title, slug, excerpt, created_at")
+      .eq("published", true)
+      .order("created_at", { ascending: false })
+      .limit(5);
+
+    if (error) {
+      console.error("최근 글 조회 에러:", error.message);
+      return [];
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error("최근 글 조회 실패:", error);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const recentArticles = await getRecentArticles();
+
   return (
     <div className="flex flex-col gap-12 py-8 md:py-12">
       {/* Hero Section */}
@@ -81,10 +72,10 @@ export default function Home() {
                 </CardContent>
                 <CardFooter className="flex justify-between">
                   <div className="text-sm text-muted-foreground">
-                    {article.date} · {article.readTime} 읽기
+                    {formatDate(article.created_at)}
                   </div>
                   <Button variant="ghost" size="sm" asChild>
-                    <Link href={`/articles/${article.id}`}>읽기</Link>
+                    <Link href={`/articles/${article.slug}`}>읽기</Link>
                   </Button>
                 </CardFooter>
               </Card>
