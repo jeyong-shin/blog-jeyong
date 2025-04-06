@@ -27,7 +27,7 @@ export default function AboutPage() {
         <p>
           강의 문의나 기타 질문이 있으시면 언제든지 연락해 주세요.
           <br />
-          이메일: example@email.com
+          이메일: abel@even-my-dogs.com
         </p>
       </div>
     </div>

@@ -10,14 +10,8 @@ export default function Footer() {
           </p>
         </div>
         <div className="flex gap-4">
-          <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
+          <Link href="https://www.github.com/jeyong-shin" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground">
             GitHub
-          </Link>
-          <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
-            Twitter
-          </Link>
-          <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
-            LinkedIn
           </Link>
         </div>
       </div>

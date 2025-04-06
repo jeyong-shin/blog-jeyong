@@ -46,8 +46,8 @@ export default function Home() {
     <div className="flex flex-col gap-12 py-8 md:py-12">
       {/* Hero Section */}
       <section className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-2">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center py-8 md:py-12">
+          <div className="space-y-6">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
               개발 강사 신제용의 블로그에 오신 것을 환영합니다
             </h1>
