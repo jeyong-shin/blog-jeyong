@@ -10,7 +10,7 @@ const navItems = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Articles", href: "/articles" },
-  { name: "Admin", href: "/admin" },
+  { name: "Admin", href: "/login" },
 ]
 
 export default function Header() {
